@@ -1,7 +1,6 @@
 import React from "react"
 import InputEssays from "./components/InputEssays"
 
-
 function App() {
 
   return (
