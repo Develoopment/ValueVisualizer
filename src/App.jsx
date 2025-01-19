@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div>
-      <h1 className="text-5xl mb-10">Scan your essays for free!</h1>
+      <h1 className="text-5xl mb-10 text-center">Scan your essays for free!</h1>
 
       <InputEssays />
     </div>
