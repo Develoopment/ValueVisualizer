@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 function InputEssays() {
 
   // for displaying the value
-  const [value, setValue] = useState("");
+  const [values, setValues] = useState([""]);
   const [essayInputs, setEssayInputs] = useState([""])
 
   // submits the form, talks to the server to get the value of the essay
@@ -12,10 +12,9 @@ function InputEssays() {
     e.preventDefault();
 
     // gets the form data, converts to JSON
-    const form = e.target;
-    const formData = new FormData(form);
-    const formJson = JSON.stringify(Object.fromEntries(formData.entries()));
+    const formJson = JSON.stringify(essayInputs);
 
+    console.log(formJson);
 
     try{
 
@@ -30,8 +29,9 @@ function InputEssays() {
       })
 
       // recieves the server's response (the value) and sets it to be displayed
+      
       const value = await response.json();
-      setValue(value.valueOutput) //the DOM automatically renders when the value is set
+      setValues(value) //the DOM automatically renders when the value is set
     }
     catch(error) {
       console.log(error)
@@ -97,6 +97,10 @@ function InputEssays() {
           className='w-8 h-8 block bg-red-400 border-2 border-black' 
           onClick={() => removeTextBox(index)}>-</button>
 
+          <hr />
+          <h1 className='text-xl font-bold'>{values[index]}</h1>
+          <hr />
+
           </div>
         ))}
 
@@ -107,10 +111,6 @@ function InputEssays() {
         
         <button type="submit" className="block mt-4 bg-gray-500 rounded-lg p-2">Scan</button>
       </form>
-
-      <hr />
-        <h1>{value}</h1>
-      <hr />
       
     </div>
   )
