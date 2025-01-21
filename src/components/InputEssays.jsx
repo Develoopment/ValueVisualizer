@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 function InputEssays() {
 
   // for displaying the value
-  const [values, setValues] = useState([""]);
+  const [values, setValues] = useState(["Paste in your essay in the textbox and press Scan to see the value here"]);
   const [essayInputs, setEssayInputs] = useState([""])
 
   // submits the form, talks to the server to get the value of the essay
@@ -71,45 +71,55 @@ function InputEssays() {
   }
 
   return (
-    <div>
+    <div className='p-10 md:px-60'>
+
+      {/*buttons for adding extra textboxes */}
+      {/* need to add the type="button" so that React doesn't trigger a form submit when this button is clicked */}
+      <button type="button" onClick={addTextBox} className='p-2 rounded-lg bg-green-400 border-2 hover:bg-opacity-80 transition-colors border-accent'>+ Add New Essay</button>
         
-      <form onSubmit={handleSubmit} className='p-8'>
+        
+      <form onSubmit={handleSubmit} className='my-5 md:my-20 space-y-10'>
         {/* iterating over the number of textareas, if the below button is clicked, the essayInputs state is incremented and this component is rerended to show that many textareas */}
         {essayInputs.map((item, index) => (
-          <div key={"container-"+index}>
-
-          <textarea 
-          className="border-2 border-black resize" 
-          type="text" 
-          name="essay" 
-          rows={10} 
-          cols={50} 
-          key={index}
-          onChange={e => handleChange(index, e)}
-
-          value={item}
-          />
-
-
+          
+          <div key={"container-"+index} className=' space-y-5'>
+          
           <button 
-          type="button"
-          key={"btn-" + index} 
-          className='w-8 h-8 block bg-red-400 border-2 border-black' 
-          onClick={() => removeTextBox(index)}>-</button>
+            type="button"
+            key={"btn-" + index} 
+            className='w-8 h-8 block float-right bg-red-400 border-2 border-black mb-5' 
+            onClick={() => removeTextBox(index)}>-</button>
 
-          <hr />
-          <h1 className='text-xl font-bold'>{values[index]}</h1>
-          <hr />
+          <div className='md:flex space-x-10'>
+            
+            <textarea 
+            className="border-2 border-black resize" 
+            type="text" 
+            name="essay" 
+            rows={10} 
+            cols={49} 
+            key={index}
+            onChange={e => handleChange(index, e)}
+
+            value={item}
+            />
+
+
+            <div className='w-auto md:my-auto'>
+
+              <h1 className='text-2xl font-medium'>{values[index]}</h1>
+
+            </div>
+          </div>
+          
+
+          <hr className='border border-accent '/>
 
           </div>
         ))}
 
         
-        {/*buttons for adding extra textboxes */}
-        {/* need to add the type="button" so that React doesn't trigger a form submit when this button is clicked */}
-        <button type="button" onClick={addTextBox} className='w-8 h-8 block bg-green-400 border-2 border-black'>+</button>
-        
-        <button type="submit" className="block mt-4 bg-gray-500 rounded-lg p-2">Scan</button>
+        <button type="submit" className="block mt-4 min-w-20 bg-gray-500 rounded-lg p-2 border-2 hover:bg-opacity-80 transition-colors border-accent">Scan</button>
       </form>
       
     </div>

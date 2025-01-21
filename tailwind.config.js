@@ -8,7 +8,16 @@ export default {
     
       ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "lato" : ['Lato', 'sans-serif']
+      },
+      colors: {
+        "primary": "#FAF9F6",
+        "text": "black",
+        "accent": "#2F0909",
+      }
+    },
   },
   plugins: [],
 }
